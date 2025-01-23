@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 
 const UsersSection = () => {
-  const [selectedNav, setSelectedNav] = useState("Users"); // Track the selected navigation item
+  const [selectedNav, setSelectedNav] = useState("Users");
   const [users, setUsers] = useState([
     {
       name: "Rahul Sinha",
@@ -58,19 +58,16 @@ const UsersSection = () => {
 
   const [filterActive, setFilterActive] = useState(false);
 
-  // Function to toggle filter
   const toggleFilter = () => {
     setFilterActive(!filterActive);
   };
 
-  // Filtered users based on active status
   const filteredUsers = filterActive
     ? users.filter((user) => user.active)
     : users;
 
   return (
     <div style={styles.container}>
-      {/* Selected Navigation Heading */}
       <h1 style={styles.heading}>{selectedNav}</h1>
 
       {/* Profile Section */}
@@ -79,17 +76,23 @@ const UsersSection = () => {
         <div style={styles.profileText}>Hi User</div>
       </div>
 
-      {/* Users Summary and Actions */}
+      {/* Summary Section */}
       <div style={styles.summary}>
+        {/* Total Users Card */}
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Total Users</h3>
           <p style={styles.cardValue}>{users.length}</p>
+          <div style={styles.wave}></div>
+          <div style={styles.waveOverlay}></div>
         </div>
+        {/* Active Users Card */}
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Active Users</h3>
           <p style={styles.cardValue}>
             {users.filter((user) => user.active).length}
           </p>
+          <div style={styles.wave}></div>
+          <div style={styles.waveOverlay}></div>
         </div>
         <div style={styles.actions}>
           <button style={styles.button}>+ Add User</button>
@@ -97,7 +100,7 @@ const UsersSection = () => {
         </div>
       </div>
 
-      {/* Filter Icon */}
+      {/* Filter Section */}
       <div style={styles.filterContainer}>
         <FaFilter
           style={styles.filterIcon}
@@ -109,7 +112,7 @@ const UsersSection = () => {
         </span>
       </div>
 
-      {/* Users List Table */}
+      {/* Users Table */}
       <table style={styles.table}>
         <thead>
           <tr>
@@ -126,7 +129,16 @@ const UsersSection = () => {
         </thead>
         <tbody>
           {filteredUsers.map((user, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              style={styles.tr}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#f9f9f9")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "#fff")
+              }
+            >
               <td style={styles.td}>
                 <input
                   type="checkbox"
@@ -175,26 +187,25 @@ const styles = {
     fontSize: "24px",
     fontWeight: "bold",
     color: "#333",
-    marginBottom: "20px", // Space below heading
-    textAlign: "left", // Left align the heading
+    marginBottom: "20px",
   },
   profileContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end", // Aligns to the right
-    marginBottom: "15px", // Space below profile section
+    justifyContent: "flex-end",
+    marginBottom: "15px",
   },
   profileIcon: {
     width: "40px",
     height: "40px",
     borderRadius: "50%",
-    backgroundColor: "#f4f4f4", // Placeholder for profile image
+    backgroundColor: "#f4f4f4",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: "20px",
     color: "#888",
-    marginRight: "10px", // Space between icon and text
+    marginRight: "10px",
   },
   profileText: {
     fontSize: "16px",
@@ -206,35 +217,55 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: "20px",
-    flexWrap: "nowrap", // Ensures everything stays in one row
   },
   card: {
     flex: "1",
     backgroundColor: "#f4f4f4",
     padding: "15px",
     margin: "0 10px",
-    textAlign: "center",
+    textAlign: "left",
     borderRadius: "8px",
+    position: "relative", // For wave positioning
+    overflow: "hidden",
   },
   cardTitle: {
     fontSize: "16px",
     color: "#888",
     margin: "0 0 5px 0",
-    textAlign: "left",
   },
   cardValue: {
-    fontSize: "24px",
+    fontSize: "36px",
     fontWeight: "bold",
+    color: "#333",
     margin: 0,
-    textAlign: "left",
+  },
+  wave: {
+    position: "absolute",
+    top: "50%",
+    right: "-30px",
+    width: "120px",
+    height: "80px",
+    backgroundColor: "#0048BA", // Dark blue wave
+    borderTopRightRadius: "60px",
+    borderBottomRightRadius: "60px",
+    transform: "translateY(-50%)",
+  },
+  waveOverlay: {
+    position: "absolute",
+    top: "55%",
+    right: "0",
+    width: "60px",
+    height: "40px",
+    backgroundColor: "#77B5FE", // Light blue overlay
+    borderRadius: "50%",
+    transform: "translateY(-50%)",
   },
   actions: {
     display: "flex",
-    flexDirection: "column", // Stack buttons vertically
-    alignItems: "flex-start", // Align buttons to the left
+    flexDirection: "column",
   },
   button: {
-    marginBottom: "10px", // Space between buttons
+    marginBottom: "10px",
     padding: "8px 15px",
     backgroundColor: "#007bff",
     color: "#fff",
@@ -245,7 +276,7 @@ const styles = {
   filterContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end", // Align filter to the right
+    justifyContent: "flex-end",
     marginBottom: "10px",
   },
   filterIcon: {
@@ -262,17 +293,29 @@ const styles = {
     width: "100%",
     borderCollapse: "collapse",
     marginTop: "10px",
+    backgroundColor: "#fff",
+    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+    borderRadius: "8px",
+    overflow: "hidden",
   },
   th: {
-    padding: "10px",
-    backgroundColor: "#f4f4f4",
+    padding: "12px 15px",
+    backgroundColor: "#e6f7ff",
     textAlign: "left",
-    border: "1px solid #ddd",
+    borderBottom: "2px solid #ddd",
+    color: "#333",
+    fontWeight: "bold",
+    fontSize: "14px",
   },
   td: {
-    padding: "10px",
-    border: "1px solid #ddd",
+    padding: "10px 15px",
+    borderBottom: "1px solid #ddd",
+    color: "#555",
+    fontSize: "13px",
     textAlign: "left",
+  },
+  tr: {
+    backgroundColor: "#fff",
   },
 };
 
