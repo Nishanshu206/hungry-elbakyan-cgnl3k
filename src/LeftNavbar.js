@@ -47,13 +47,14 @@ const LeftNavbar = () => {
           <FaBuilding style={styles.icon} /> Rooms
         </li>
         <li style={styles.navItem}>
-          <FaCar style={styles.icon} />
-          Parking
+          <FaCar style={styles.icon} /> Parking
         </li>
         <li style={styles.navItem}>
           <FaCar style={styles.icon} /> Vehicle
         </li>
-        <li style={styles.navItem}>
+
+        {/* Settings Menu Item */}
+        <li style={styles.navItemBottom}>
           <FaCog style={styles.icon} /> Settings
         </li>
       </ul>
@@ -105,11 +106,20 @@ const styles = {
   navList: {
     listStyle: "none",
     padding: 0,
+    display: "flex",
+    flexDirection: "column", // Ensure items are vertically aligned
+    height: "100%", // Use full height for flex layout
   },
   navItem: {
     display: "flex",
     alignItems: "center",
     marginBottom: "15px",
+    cursor: "pointer",
+  },
+  navItemBottom: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: "70px", // Push this item to the bottom
     cursor: "pointer",
   },
   icon: {
