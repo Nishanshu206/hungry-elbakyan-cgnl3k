@@ -2,58 +2,12 @@ import React, { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 
 const UsersSection = () => {
-  const [selectedNav, setSelectedNav] = useState("Users");
   const [users, setUsers] = useState([
-    {
-      name: "Rahul Sinha",
-      email: "rahul.sinha@mazars.co.in",
-      phone: "1234567890",
-      role: "Admin",
-      designation: "Tech Lead",
-      location: "Delhi",
-      floor: "1st",
-      active: true,
-    },
-    {
-      name: "Faizan Ahmed",
-      email: "faizan.ahmed@mazars.co.in",
-      phone: "9876543210",
-      role: "User",
-      designation: "IT Engineer",
-      location: "Mumbai",
-      floor: "2nd",
-      active: false,
-    },
-    {
-      name: "Aditi Sharma",
-      email: "aditi.sharma@mazars.co.in",
-      phone: "4567891230",
-      role: "Manager",
-      designation: "Operations",
-      location: "Bangalore",
-      floor: "3rd",
-      active: true,
-    },
-    {
-      name: "Sanjay Gupta",
-      email: "sanjay.gupta@mazars.co.in",
-      phone: "6543219870",
-      role: "HR",
-      designation: "HR Manager",
-      location: "Chennai",
-      floor: "4th",
-      active: false,
-    },
-    {
-      name: "Ritika Desai",
-      email: "ritika.desai@mazars.co.in",
-      phone: "7654321980",
-      role: "User",
-      designation: "Software Developer",
-      location: "Hyderabad",
-      floor: "5th",
-      active: true,
-    },
+    { name: "Rahul Sinha", email: "rahul.sinha@mazars.co.in", phone: "1234567890", role: "Admin", designation: "Tech Lead", location: "Delhi", floor: "1st", active: true },
+    { name: "Faizan Ahmed", email: "faizan.ahmed@mazars.co.in", phone: "9876543210", role: "User", designation: "IT Engineer", location: "Mumbai", floor: "2nd", active: false },
+    { name: "Aditi Sharma", email: "aditi.sharma@mazars.co.in", phone: "4567891230", role: "Manager", designation: "Operations", location: "Bangalore", floor: "3rd", active: true },
+    { name: "Sanjay Gupta", email: "sanjay.gupta@mazars.co.in", phone: "6543219870", role: "HR", designation: "HR Manager", location: "Chennai", floor: "4th", active: false },
+    { name: "Ritika Desai", email: "ritika.desai@mazars.co.in", phone: "7654321980", role: "User", designation: "Software Developer", location: "Hyderabad", floor: "5th", active: true },
   ]);
 
   const [filterActive, setFilterActive] = useState(false);
@@ -62,37 +16,30 @@ const UsersSection = () => {
     setFilterActive(!filterActive);
   };
 
-  const filteredUsers = filterActive
-    ? users.filter((user) => user.active)
-    : users;
+  const filteredUsers = filterActive ? users.filter((user) => user.active) : users;
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>{selectedNav}</h1>
-
-      {/* Profile Section */}
-      <div style={styles.profileContainer}>
-        <div style={styles.profileIcon}>🌸</div>
-        <div style={styles.profileText}>Hi User</div>
+      {/* Header */}
+      <div style={styles.header}>
+        <h2 style={styles.title}>Users</h2>
+        <div style={styles.profile}>
+          <span style={styles.profileIcon}>👤</span>
+          <span style={styles.profileText}>Hello, User</span>
+        </div>
       </div>
 
-      {/* Summary Section */}
-      <div style={styles.summary}>
-        {/* Total Users Card */}
+      {/* Summary Cards */}
+      <div style={styles.cards}>
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Total Users</h3>
           <p style={styles.cardValue}>{users.length}</p>
-          <div style={styles.wave}></div>
-          <div style={styles.waveOverlay}></div>
+          <div style={styles.cardWave}></div>
         </div>
-        {/* Active Users Card */}
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Active Users</h3>
-          <p style={styles.cardValue}>
-            {users.filter((user) => user.active).length}
-          </p>
-          <div style={styles.wave}></div>
-          <div style={styles.waveOverlay}></div>
+          <p style={styles.cardValue}>{users.filter((user) => user.active).length}</p>
+          <div style={styles.cardWave}></div>
         </div>
         <div style={styles.actions}>
           <button style={styles.button}>+ Add User</button>
@@ -101,13 +48,9 @@ const UsersSection = () => {
       </div>
 
       {/* Filter Section */}
-      <div style={styles.filterContainer}>
-        <FaFilter
-          style={styles.filterIcon}
-          onClick={toggleFilter}
-          title="Filter Active Users"
-        />
-        <span style={styles.filterLabel}>
+      <div style={styles.filter}>
+        <FaFilter style={styles.filterIcon} onClick={toggleFilter} />
+        <span style={styles.filterText}>
           {filterActive ? "Showing Active Users Only" : "Showing All Users"}
         </span>
       </div>
@@ -116,30 +59,21 @@ const UsersSection = () => {
       <table style={styles.table}>
         <thead>
           <tr>
-            <th style={styles.th}></th>
-            <th style={styles.th}>Name</th>
-            <th style={styles.th}>Email</th>
-            <th style={styles.th}>Phone</th>
-            <th style={styles.th}>Role</th>
-            <th style={styles.th}>Designation</th>
-            <th style={styles.th}>Location</th>
-            <th style={styles.th}>Floor</th>
-            <th style={styles.th}>Active</th>
+            <th style={styles.tableHeader}></th>
+            <th style={styles.tableHeader}>Name</th>
+            <th style={styles.tableHeader}>Email</th>
+            <th style={styles.tableHeader}>Phone</th>
+            <th style={styles.tableHeader}>Role</th>
+            <th style={styles.tableHeader}>Designation</th>
+            <th style={styles.tableHeader}>Location</th>
+            <th style={styles.tableHeader}>Floor</th>
+            <th style={styles.tableHeader}>Active</th>
           </tr>
         </thead>
         <tbody>
           {filteredUsers.map((user, index) => (
-            <tr
-              key={index}
-              style={styles.tr}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#f9f9f9")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "#fff")
-              }
-            >
-              <td style={styles.td}>
+            <tr key={index} style={styles.tableRow}>
+              <td style={styles.tableCell}>
                 <input
                   type="checkbox"
                   checked={user.active}
@@ -150,14 +84,14 @@ const UsersSection = () => {
                   }}
                 />
               </td>
-              <td style={styles.td}>{user.name}</td>
-              <td style={styles.td}>{user.email}</td>
-              <td style={styles.td}>{user.phone}</td>
-              <td style={styles.td}>{user.role}</td>
-              <td style={styles.td}>{user.designation}</td>
-              <td style={styles.td}>{user.location}</td>
-              <td style={styles.td}>{user.floor}</td>
-              <td style={styles.td}>
+              <td style={styles.tableCell}>{user.name}</td>
+              <td style={styles.tableCell}>{user.email}</td>
+              <td style={styles.tableCell}>{user.phone}</td>
+              <td style={styles.tableCell}>{user.role}</td>
+              <td style={styles.tableCell}>{user.designation}</td>
+              <td style={styles.tableCell}>{user.location}</td>
+              <td style={styles.tableCell}>{user.floor}</td>
+              <td style={styles.tableCell}>
                 <input
                   type="checkbox"
                   checked={user.active}
@@ -179,143 +113,120 @@ const UsersSection = () => {
 const styles = {
   container: {
     padding: "20px",
-    backgroundColor: "#fff",
+    backgroundColor: "#f8f9fa",
     borderRadius: "8px",
     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
   },
-  heading: {
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  title: {
     fontSize: "24px",
     fontWeight: "bold",
     color: "#333",
-    marginBottom: "20px",
   },
-  profileContainer: {
+  profile: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginBottom: "15px",
   },
   profileIcon: {
-    width: "40px",
-    height: "40px",
-    borderRadius: "50%",
-    backgroundColor: "#f4f4f4",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "20px",
-    color: "#888",
-    marginRight: "10px",
+    fontSize: "18px",
+    marginRight: "8px",
   },
   profileText: {
     fontSize: "16px",
     color: "#555",
-    fontWeight: "bold",
   },
-  summary: {
+  cards: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: "20px",
   },
   card: {
-    flex: "1",
-    backgroundColor: "#f4f4f4",
-    padding: "15px",
+    flex: 1,
+    padding: "20px",
     margin: "0 10px",
-    textAlign: "left",
+    backgroundColor: "#e6f7ff",
     borderRadius: "8px",
-    position: "relative", // For wave positioning
-    overflow: "hidden",
+    position: "relative",
+    textAlign: "center",
+    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
   },
   cardTitle: {
-    fontSize: "16px",
-    color: "#888",
-    margin: "0 0 5px 0",
+    fontSize: "14px",
+    color: "#555",
+    marginBottom: "8px",
   },
   cardValue: {
-    fontSize: "36px",
+    fontSize: "32px",
     fontWeight: "bold",
-    color: "#333",
-    margin: 0,
+    color: "#0078D7",
   },
-  wave: {
+  cardWave: {
     position: "absolute",
-    top: "50%",
-    right: "-30px",
-    width: "120px",
-    height: "80px",
-    backgroundColor: "#0048BA", // Dark blue wave
-    borderTopRightRadius: "60px",
-    borderBottomRightRadius: "60px",
-    transform: "translateY(-50%)",
-  },
-  waveOverlay: {
-    position: "absolute",
-    top: "55%",
-    right: "0",
-    width: "60px",
-    height: "40px",
-    backgroundColor: "#77B5FE", // Light blue overlay
-    borderRadius: "50%",
-    transform: "translateY(-50%)",
+    bottom: "0",
+    left: "0",
+    width: "100%",
+    height: "10px",
+    backgroundColor: "#0078D7",
+    borderBottomLeftRadius: "8px",
+    borderBottomRightRadius: "8px",
   },
   actions: {
     display: "flex",
     flexDirection: "column",
   },
   button: {
-    marginBottom: "10px",
-    padding: "8px 15px",
-    backgroundColor: "#007bff",
+    padding: "10px 15px",
+    margin: "5px 0",
+    backgroundColor: "#0078D7",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
   },
-  filterContainer: {
+  filter: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginBottom: "10px",
+    marginBottom: "15px",
   },
   filterIcon: {
-    fontSize: "18px",
-    color: "#007bff",
-    cursor: "pointer",
+    fontSize: "16px",
+    color: "#0078D7",
     marginRight: "8px",
+    cursor: "pointer",
   },
-  filterLabel: {
+  filterText: {
     fontSize: "14px",
     color: "#555",
   },
   table: {
     width: "100%",
     borderCollapse: "collapse",
-    marginTop: "10px",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
     borderRadius: "8px",
     overflow: "hidden",
   },
-  th: {
-    padding: "12px 15px",
+  tableHeader: {
+    padding: "12px",
     backgroundColor: "#e6f7ff",
     textAlign: "left",
-    borderBottom: "2px solid #ddd",
-    color: "#333",
-    fontWeight: "bold",
     fontSize: "14px",
-  },
-  td: {
-    padding: "10px 15px",
-    borderBottom: "1px solid #ddd",
+    fontWeight: "bold",
     color: "#555",
-    fontSize: "13px",
-    textAlign: "left",
+    borderBottom: "1px solid #ddd",
   },
-  tr: {
-    backgroundColor: "#fff",
+  tableRow: {
+    transition: "background-color 0.2s",
+  },
+  tableCell: {
+    padding: "12px",
+    borderBottom: "1px solid #ddd",
+    fontSize: "14px",
+    color: "#555",
   },
 };
 
