@@ -14,48 +14,58 @@ import {
 const LeftNavbar = () => {
   return (
     <div style={styles.navContainer}>
-      {/* Updated Logo */}
+      {/* Logo Section */}
       <div style={styles.logo}>
-        <div style={styles.fmText}>fm</div>
+        <span style={styles.fmText}>fm</span>
         <div style={styles.subText}>
-          <div style={styles.bookMy}>Book My</div>
-          <div style={styles.desk}>Desk</div>
+          <span style={styles.bookMy}>Book My</span>
+          <span style={styles.desk}>Desk</span>
         </div>
       </div>
 
-      {/* Navigation Menu */}
+      {/* Navigation Items */}
       <ul style={styles.navList}>
         <li style={styles.navItem}>
-          <FaHome style={styles.icon} /> Home
+          <FaHome style={styles.icon} />
+          <span>Home</span>
         </li>
         <li style={styles.navItem}>
-          <FaUsers style={styles.icon} /> Users
+          <FaUsers style={styles.icon} />
+          <span>Users</span>
         </li>
         <li style={styles.navItem}>
-          <FaMapMarkerAlt style={styles.icon} /> Locations
+          <FaMapMarkerAlt style={styles.icon} />
+          <span>Locations</span>
         </li>
         <li style={styles.navItem}>
-          <FaLayerGroup style={styles.icon} /> Floors
+          <FaLayerGroup style={styles.icon} />
+          <span>Floors</span>
         </li>
         <li style={styles.navItem}>
-          <FaTable style={styles.icon} /> Rows
+          <FaTable style={styles.icon} />
+          <span>Rows</span>
         </li>
         <li style={styles.navItem}>
-          <FaChair style={styles.icon} /> Desks
+          <FaChair style={styles.icon} />
+          <span>Desks</span>
         </li>
         <li style={styles.navItem}>
-          <FaBuilding style={styles.icon} /> Rooms
+          <FaBuilding style={styles.icon} />
+          <span>Rooms</span>
         </li>
         <li style={styles.navItem}>
-          <FaCar style={styles.icon} /> Parking
+          <FaCar style={styles.icon} />
+          <span>Parking</span>
         </li>
         <li style={styles.navItem}>
-          <FaCar style={styles.icon} /> Vehicle
+          <FaCar style={styles.icon} />
+          <span>Vehicle</span>
         </li>
 
-        {/* Settings Menu Item */}
+        {/* Settings */}
         <li style={styles.navItemBottom}>
-          <FaCog style={styles.icon} /> Settings
+          <FaCog style={styles.icon} />
+          <span>Settings</span>
         </li>
       </ul>
     </div>
@@ -64,66 +74,71 @@ const LeftNavbar = () => {
 
 const styles = {
   navContainer: {
-    width: "240px",
+    width: "250px",
     height: "100vh",
-    backgroundColor: "#f4f4f4",
+    backgroundColor: "#FFFFFF",
     display: "flex",
     flexDirection: "column",
     padding: "20px",
     boxShadow: "2px 0 5px rgba(0,0,0,0.1)",
+    fontFamily: "'Arial', sans-serif",
   },
   logo: {
-    display: "flex", // Align FM and sub-text horizontally
+    display: "flex",
     alignItems: "center",
     marginBottom: "30px",
   },
   fmText: {
-    fontSize: "80px", // Large size for "FM"
+    fontSize: "48px",
     fontWeight: "bold",
-    lineHeight: "1",
-    color: "#2b2b2b",
-    margin: "0 10px 0 0", // Add spacing between FM and sub-text
+    color: "#0078D7",
+    marginRight: "10px",
   },
   subText: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between", // Align "Book My" at the top and "Desk" at the bottom
-    height: "80px", // Matches the height of FM text
   },
   bookMy: {
-    fontSize: "10px", // Smaller size for "Book My"
-    lineHeight: "8",
-    color: "#000080",
+    fontSize: "12px",
+    color: "#5798d9",
     textTransform: "uppercase",
+    fontWeight: "bold",
+    lineHeight: "1.2",
   },
   desk: {
-    fontSize: "10px", // Smaller size for "Desk"
+    fontSize: "16px",
     fontWeight: "bold",
-    lineHeight: "1", // Matches the line height of "Book My" for consistent spacing
-    color: "#000080",
-    margin: "0", // No margin to remove extra space
+    color: "#191970",
   },
   navList: {
     listStyle: "none",
     padding: 0,
     display: "flex",
-    flexDirection: "column", // Ensure items are vertically aligned
-    height: "100%", // Use full height for flex layout
+    flexDirection: "column",
+    flex: 1,
   },
   navItem: {
     display: "flex",
     alignItems: "center",
-    marginBottom: "15px",
+    padding: "10px 0",
     cursor: "pointer",
+    fontSize: "16px",
+    color: "#333",
+    transition: "background 0.3s ease",
   },
   navItemBottom: {
     display: "flex",
     alignItems: "center",
-    marginTop: "70px", // Push this item to the bottom
+    marginTop: "auto",
     cursor: "pointer",
+    fontSize: "16px",
+    color: "#333",
+    transition: "background 0.3s ease",
   },
   icon: {
-    marginRight: "10px",
+    marginRight: "15px",
+    fontSize: "20px",
+    color: "#3a3b3d",
   },
 };
 
