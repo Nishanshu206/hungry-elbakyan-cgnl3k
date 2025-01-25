@@ -66,7 +66,7 @@ const styles = {
   navContainer: {
     width: "250px",
     height: "100vh",
-    backgroundColor: "#F8F9FA",
+    backgroundColor: "#FFFFFF",
     display: "flex",
     flexDirection: "column",
     padding: "20px",
@@ -90,14 +90,15 @@ const styles = {
   },
   bookMy: {
     fontSize: "12px",
-    color: "#333",
+    color: "#5798d9",
     textTransform: "uppercase",
+    fontWeight: "bold",
     lineHeight: "1.2",
   },
   desk: {
     fontSize: "16px",
     fontWeight: "bold",
-    color: "#333",
+    color: "#191970",
   },
   navList: {
     listStyle: "none",
@@ -127,7 +128,7 @@ const styles = {
   icon: {
     marginRight: "15px",
     fontSize: "20px",
-    color: "#0078D7",
+    color: "#3a3b3d",
   },
 };
 

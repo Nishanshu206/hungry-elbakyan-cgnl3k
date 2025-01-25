@@ -20,27 +20,49 @@ const UsersSection = () => {
 
   return (
     <div style={styles.container}>
-      {/* Header */}
+      {/* Header Section */}
       <div style={styles.header}>
         <h2 style={styles.title}>Users</h2>
         <div style={styles.profile}>
-          <span style={styles.profileIcon}>👤</span>
+          <img
+            src="/path-to-profile-image.jpg" // Replace with actual profile image path
+            alt="Profile"
+            style={styles.profileImage}
+          />
           <span style={styles.profileText}>Hello, User</span>
         </div>
       </div>
 
-      {/* Summary Cards */}
+      {/* Cards Section */}
       <div style={styles.cards}>
+        {/* Total Users Card */}
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Total Users</h3>
           <p style={styles.cardValue}>{users.length}</p>
-          <div style={styles.cardWave}></div>
+          <img
+            src="/a.jpeg" // Replace with your image path
+            alt="Wave Design"
+            style={styles.cardImage}
+          />
         </div>
+
         <div style={styles.card}>
-          <h3 style={styles.cardTitle}>Active Users</h3>
-          <p style={styles.cardValue}>{users.filter((user) => user.active).length}</p>
-          <div style={styles.cardWave}></div>
-        </div>
+  <h3 style={styles.cardTitle}>Active Users</h3>
+  <p style={styles.cardValue}>{users.filter((user) => user.active).length}</p>
+
+  {/* This p is now positioned at the bottom-right corner */}
+  <p style={styles.cardChange}>
+    <span style={styles.cardChangeArrow}>▲</span> 20%
+  </p>
+
+  <img
+    src="/b.jpeg"
+    alt="Wave Design"
+    style={styles.cardImage}
+  />
+</div>
+
+        {/* Actions Section */}
         <div style={styles.actions}>
           <button style={styles.button}>+ Add User</button>
           <button style={styles.button}>Bulk Add</button>
@@ -113,9 +135,7 @@ const UsersSection = () => {
 const styles = {
   container: {
     padding: "20px",
-    backgroundColor: "#f8f9fa",
-    borderRadius: "8px",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+    backgroundColor: "#e1edf7",
   },
   header: {
     display: "flex",
@@ -132,63 +152,88 @@ const styles = {
     display: "flex",
     alignItems: "center",
   },
-  profileIcon: {
-    fontSize: "18px",
-    marginRight: "8px",
+  profileImage: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    marginRight: "10px",
   },
   profileText: {
     fontSize: "16px",
     color: "#555",
   },
-  cards: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: "20px",
-  },
   card: {
     flex: 1,
     padding: "20px",
-    margin: "0 10px",
-    backgroundColor: "#e6f7ff",
-    borderRadius: "8px",
+    backgroundColor: "#ffffff",
+    borderRadius: "10px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "left",
     position: "relative",
-    textAlign: "center",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+    height: "100px", // Set a fixed height for all cards
+    display: "flex", // Use flexbox to align content
+    flexDirection: "column", // Stack content vertically
+    justifyContent: "space-between", // Distribute space evenly (top-to-bottom)
   },
   cardTitle: {
     fontSize: "14px",
     color: "#555",
-    marginBottom: "8px",
+    marginBottom: "10px",
   },
   cardValue: {
-    fontSize: "32px",
+    fontSize: "36px",
     fontWeight: "bold",
     color: "#0078D7",
   },
-  cardWave: {
+  cardChange: {
     position: "absolute",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    height: "10px",
-    backgroundColor: "#0078D7",
-    borderBottomLeftRadius: "8px",
-    borderBottomRightRadius: "8px",
+    bottom: "10px",
+    right: "10px",
+    fontSize: "14px",
+    color: "green",
+    margin: 0,
   },
+  cardImage: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    width: "50px",
+    height: "50px",
+  },
+  cards: {
+    display: "flex",
+    gap: "20px",
+    marginBottom: "20px",
+  },
+  
+  cardChangeArrow: {
+    color: "green",
+    fontWeight: "bold",
+  },
+
   actions: {
     display: "flex",
     flexDirection: "column",
+    gap: "10px",
+    
   },
   button: {
-    padding: "10px 15px",
-    margin: "5px 0",
-    backgroundColor: "#0078D7",
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
+    width: "140px", 
+    height: "40px", 
+    padding: "10px 20px", 
+    backgroundColor: "#ffffff", 
+    color: "#3a3b3d", 
+    border: "none", 
+    borderRadius: "4px", 
+    cursor: "pointer", 
+    display: "flex", 
+    alignItems: "center", 
+    justifyContent: "center", 
+    textAlign: "center",
+    fontSize: "14px", 
+    fontWeight: "bold", 
   },
+  
   filter: {
     display: "flex",
     alignItems: "center",
@@ -207,8 +252,6 @@ const styles = {
   table: {
     width: "100%",
     borderCollapse: "collapse",
-    borderRadius: "8px",
-    overflow: "hidden",
   },
   tableHeader: {
     padding: "12px",
@@ -218,9 +261,6 @@ const styles = {
     fontWeight: "bold",
     color: "#555",
     borderBottom: "1px solid #ddd",
-  },
-  tableRow: {
-    transition: "background-color 0.2s",
   },
   tableCell: {
     padding: "12px",
