@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 
 const UsersSection = () => {
-  const [selectedNav, setSelectedNav] = useState("Users");
   const [users, setUsers] = useState([
     {
       name: "Rahul Sinha",
@@ -57,9 +56,15 @@ const UsersSection = () => {
   ]);
 
   const [filterActive, setFilterActive] = useState(false);
+  const [activeButton, setActiveButton] = useState(false); // State to track button click
 
   const toggleFilter = () => {
     setFilterActive(!filterActive);
+  };
+
+  const handleButtonClick = () => {
+    setActiveButton(true); // Change the state to active on click
+    setTimeout(() => setActiveButton(false), 200); // Reset after 200ms
   };
 
   const filteredUsers = filterActive
@@ -68,46 +73,71 @@ const UsersSection = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>{selectedNav}</h1>
-
-      {/* Profile Section */}
-      <div style={styles.profileContainer}>
-        <div style={styles.profileIcon}>🌸</div>
-        <div style={styles.profileText}>Hi User</div>
+      {/* Header Section */}
+      <div style={styles.header}>
+        <h2 style={styles.title}>Users</h2>
+        <div style={styles.profile}>
+          <img
+            src="/path-to-profile-image.jpg" // Replace with actual profile image path
+            alt="Profile"
+            style={styles.profileImage}
+          />
+          <span style={styles.profileText}>Hello, User</span>
+        </div>
       </div>
 
-      {/* Summary Section */}
-      <div style={styles.summary}>
-        {/* Total Users Card */}
+      {/* Cards Section */}
+      <div style={styles.cards}>
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Total Users</h3>
           <p style={styles.cardValue}>{users.length}</p>
-          <div style={styles.wave}></div>
-          <div style={styles.waveOverlay}></div>
+          <img
+            src="/a.png" // Replace with your image path
+            alt="Wave Design"
+            style={styles.cardImage}
+          />
         </div>
-        {/* Active Users Card */}
+
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>Active Users</h3>
           <p style={styles.cardValue}>
             {users.filter((user) => user.active).length}
           </p>
-          <div style={styles.wave}></div>
-          <div style={styles.waveOverlay}></div>
+          <p style={styles.cardChange}>
+            <span style={styles.cardChangeArrow}>▲</span> 20%
+          </p>
+          <img src="/b.png" alt="Wave Design" style={styles.cardImage} />
         </div>
+
+        {/* Actions Section */}
         <div style={styles.actions}>
-          <button style={styles.button}>+ Add User</button>
-          <button style={styles.button}>Bulk Add</button>
+          <button
+            style={{
+              ...styles.button,
+              backgroundColor: activeButton ? "#006400" : "#ffffff", // Dark green on click
+              color: activeButton ? "#ffffff" : "#3a3b3d", // Text color adjustment
+            }}
+            onClick={handleButtonClick}
+          >
+            + Add User
+          </button>
+          <button
+            style={{
+              ...styles.button,
+              backgroundColor: activeButton ? "#006400" : "#ffffff",
+              color: activeButton ? "#ffffff" : "#3a3b3d",
+            }}
+            onClick={handleButtonClick}
+          >
+            Bulk Add
+          </button>
         </div>
       </div>
 
       {/* Filter Section */}
-      <div style={styles.filterContainer}>
-        <FaFilter
-          style={styles.filterIcon}
-          onClick={toggleFilter}
-          title="Filter Active Users"
-        />
-        <span style={styles.filterLabel}>
+      <div style={styles.filter}>
+        <FaFilter style={styles.filterIcon} onClick={toggleFilter} />
+        <span style={styles.filterText}>
           {filterActive ? "Showing Active Users Only" : "Showing All Users"}
         </span>
       </div>
@@ -116,30 +146,21 @@ const UsersSection = () => {
       <table style={styles.table}>
         <thead>
           <tr>
-            <th style={styles.th}></th>
-            <th style={styles.th}>Name</th>
-            <th style={styles.th}>Email</th>
-            <th style={styles.th}>Phone</th>
-            <th style={styles.th}>Role</th>
-            <th style={styles.th}>Designation</th>
-            <th style={styles.th}>Location</th>
-            <th style={styles.th}>Floor</th>
-            <th style={styles.th}>Active</th>
+            <th style={styles.tableHeader}></th>
+            <th style={styles.tableHeader}>Name</th>
+            <th style={styles.tableHeader}>Email</th>
+            <th style={styles.tableHeader}>Phone</th>
+            <th style={styles.tableHeader}>Role</th>
+            <th style={styles.tableHeader}>Designation</th>
+            <th style={styles.tableHeader}>Location</th>
+            <th style={styles.tableHeader}>Floor</th>
+            <th style={styles.tableHeader}>Active</th>
           </tr>
         </thead>
         <tbody>
           {filteredUsers.map((user, index) => (
-            <tr
-              key={index}
-              style={styles.tr}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#f9f9f9")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "#fff")
-              }
-            >
-              <td style={styles.td}>
+            <tr key={index} style={styles.tableRow}>
+              <td style={styles.tableCell}>
                 <input
                   type="checkbox"
                   checked={user.active}
@@ -150,24 +171,14 @@ const UsersSection = () => {
                   }}
                 />
               </td>
-              <td style={styles.td}>{user.name}</td>
-              <td style={styles.td}>{user.email}</td>
-              <td style={styles.td}>{user.phone}</td>
-              <td style={styles.td}>{user.role}</td>
-              <td style={styles.td}>{user.designation}</td>
-              <td style={styles.td}>{user.location}</td>
-              <td style={styles.td}>{user.floor}</td>
-              <td style={styles.td}>
-                <input
-                  type="checkbox"
-                  checked={user.active}
-                  onChange={() => {
-                    const updatedUsers = [...users];
-                    updatedUsers[index].active = !updatedUsers[index].active;
-                    setUsers(updatedUsers);
-                  }}
-                />
-              </td>
+              <td style={styles.tableCell}>{user.name}</td>
+              <td style={styles.tableCell}>{user.email}</td>
+              <td style={styles.tableCell}>{user.phone}</td>
+              <td style={styles.tableCell}>{user.role}</td>
+              <td style={styles.tableCell}>{user.designation}</td>
+              <td style={styles.tableCell}>{user.location}</td>
+              <td style={styles.tableCell}>{user.floor}</td>
+              <td style={styles.tableCell}>{user.active ? "Yes" : "No"}</td>
             </tr>
           ))}
         </tbody>
@@ -179,143 +190,135 @@ const UsersSection = () => {
 const styles = {
   container: {
     padding: "20px",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+    backgroundColor: "#e1edf7",
   },
-  heading: {
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  title: {
     fontSize: "24px",
     fontWeight: "bold",
     color: "#333",
-    marginBottom: "20px",
   },
-  profileContainer: {
+  profile: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginBottom: "15px",
   },
-  profileIcon: {
+  profileImage: {
     width: "40px",
     height: "40px",
     borderRadius: "50%",
-    backgroundColor: "#f4f4f4",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "20px",
-    color: "#888",
     marginRight: "10px",
   },
   profileText: {
     fontSize: "16px",
     color: "#555",
-    fontWeight: "bold",
-  },
-  summary: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: "20px",
   },
   card: {
-    flex: "1",
-    backgroundColor: "#f4f4f4",
-    padding: "15px",
-    margin: "0 10px",
+    flex: 1,
+    padding: "20px",
+    backgroundColor: "#ffffff",
+    borderRadius: "10px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     textAlign: "left",
-    borderRadius: "8px",
-    position: "relative", // For wave positioning
-    overflow: "hidden",
+    position: "relative",
+    height: "100px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   cardTitle: {
-    fontSize: "16px",
-    color: "#888",
-    margin: "0 0 5px 0",
+    fontSize: "14px",
+    color: "#555",
+    marginBottom: "10px",
   },
   cardValue: {
     fontSize: "36px",
     fontWeight: "bold",
-    color: "#333",
+    color: "#0078D7",
+  },
+  cardChange: {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px",
+    fontSize: "14px",
+    color: "green",
     margin: 0,
   },
-  wave: {
+  cardImage: {
     position: "absolute",
-    top: "50%",
-    right: "-30px",
-    width: "120px",
-    height: "80px",
-    backgroundColor: "#0048BA", // Dark blue wave
-    borderTopRightRadius: "60px",
-    borderBottomRightRadius: "60px",
-    transform: "translateY(-50%)",
+    top: "10px",
+    right: "10px",
+    width: "50px",
+    height: "50px",
   },
-  waveOverlay: {
-    position: "absolute",
-    top: "55%",
-    right: "0",
-    width: "60px",
-    height: "40px",
-    backgroundColor: "#77B5FE", // Light blue overlay
-    borderRadius: "50%",
-    transform: "translateY(-50%)",
+  cards: {
+    display: "flex",
+    gap: "20px",
+    marginBottom: "20px",
+  },
+  cardChangeArrow: {
+    color: "green",
+    fontWeight: "bold",
   },
   actions: {
     display: "flex",
     flexDirection: "column",
+    gap: "10px",
   },
   button: {
-    marginBottom: "10px",
-    padding: "8px 15px",
-    backgroundColor: "#007bff",
-    color: "#fff",
+    width: "140px",
+    height: "40px",
+    padding: "10px 20px",
+    backgroundColor: "#ffffff",
+    color: "#3a3b3d",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
-  },
-  filterContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginBottom: "10px",
+    justifyContent: "center",
+    textAlign: "center",
+    fontSize: "14px",
+    fontWeight: "bold",
+    transition: "background-color 0.2s ease, color 0.2s ease",
+  },
+  filter: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "15px",
   },
   filterIcon: {
-    fontSize: "18px",
-    color: "#007bff",
-    cursor: "pointer",
+    fontSize: "16px",
+    color: "#0078D7",
     marginRight: "8px",
+    cursor: "pointer",
   },
-  filterLabel: {
+  filterText: {
     fontSize: "14px",
     color: "#555",
   },
   table: {
     width: "100%",
     borderCollapse: "collapse",
-    marginTop: "10px",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-    borderRadius: "8px",
-    overflow: "hidden",
   },
-  th: {
-    padding: "12px 15px",
+  tableHeader: {
+    padding: "12px",
     backgroundColor: "#e6f7ff",
     textAlign: "left",
-    borderBottom: "2px solid #ddd",
-    color: "#333",
-    fontWeight: "bold",
     fontSize: "14px",
-  },
-  td: {
-    padding: "10px 15px",
-    borderBottom: "1px solid #ddd",
+    fontWeight: "bold",
     color: "#555",
-    fontSize: "13px",
-    textAlign: "left",
+    borderBottom: "1px solid #ddd",
   },
-  tr: {
-    backgroundColor: "#fff",
+  tableCell: {
+    padding: "12px",
+    borderBottom: "1px solid #ddd",
+    fontSize: "14px",
+    color: "#555",
   },
 };
 
